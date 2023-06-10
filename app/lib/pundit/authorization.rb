@@ -12,12 +12,12 @@ module Pundit
       policy_scope_klass(klass).new(current_user, klass).resolve
     end
 
-    def authorize(record)
-      policy(record).send("#{action_name}?") or raise NotAuthorizedError
-    end
-
     def policy(record)
       policy_klass(record).new(current_user, record)
+    end
+
+    def authorize(record)
+      policy(record).send("#{action_name}?") or raise NotAuthorizedError
     end
 
     private
